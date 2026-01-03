@@ -153,28 +153,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function speak(text) {
   try {
-    // stop any previous speech
+    // stop previous speech
     window.speechSynthesis.cancel();
 
-    const lang = detectLangFromText(text);
     const utt = new SpeechSynthesisUtterance(text);
+
+    // ✅ Force Indian English
+    utt.lang = "en-IN";
     utt.rate = 1;
     utt.pitch = 1;
-    utt.lang = lang;
 
     const voices = window.speechSynthesis.getVoices();
-    if (voices && voices.length) {
-      const match = voices.find(v =>
-        v.lang && v.lang.toLowerCase().startsWith(lang.split("-")[0])
-      );
-      if (match) utt.voice = match;
+
+    // ✅ Prefer Indian English voice
+    const indianVoice =
+      voices.find(v => v.lang === "en-IN") ||
+      voices.find(v => v.lang.startsWith("en-IN")) ||
+      voices.find(v => v.name.toLowerCase().includes("india")) ||
+      voices.find(v => v.lang === "en-GB") || // fallback
+      voices[0];
+
+    if (indianVoice) {
+      utt.voice = indianVoice;
+      console.log("Using voice:", indianVoice.name, indianVoice.lang);
     }
 
-    // ✅ CLEAR TEXT ONLY AFTER SPEECH FINISHES
     utt.onend = () => {
       console.log("Assistant finished speaking");
-      // OPTIONAL: clear text here if you want
-      // content.innerText = "";
     };
 
     window.speechSynthesis.speak(utt);
