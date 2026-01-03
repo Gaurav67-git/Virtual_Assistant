@@ -159,6 +159,13 @@ app.post("/api/chat", async (req, res) => {
   const { message } = req.body || {};
   if (!message) return res.status(400).json({ error: "No message provided" });
 
+  // 🔍 DEBUG: check which API keys are loaded
+  console.log("KEYS:", {
+    gemini: !!process.env.GEMINI_API_KEY,
+    groq: !!process.env.GROQ_API_KEY,
+    openai: !!process.env.OPENAI_API_KEY
+  });
+
   const GEMINI_KEY = process.env.GEMINI_API_KEY;
   const GROQ_KEY = process.env.GROQ_API_KEY;
   const OPENAI_KEY = process.env.OPENAI_API_KEY;
