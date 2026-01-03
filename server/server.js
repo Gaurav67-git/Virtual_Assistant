@@ -99,24 +99,32 @@ async function callGroqChat(groqKey, message) {
           { role: "system", content: "You are Nova, a concise and helpful assistant." },
           { role: "user", content: message }
         ],
-        temperature: 0.6,
-        max_tokens: 400
+        temperature: 0.7,
+        max_tokens: 512
       })
     });
 
-    const data = await response.json();
-console.log("[GROQ RAW RESPONSE]", JSON.stringify(data, null, 2));
+    const data = await r.json();
 
-if (!response.ok) {
-  return { ok: false, error: data };
-}
+    console.log("[GROQ STATUS]", r.status);
+    console.log("[GROQ RESPONSE]", JSON.stringify(data, null, 2));
 
-    const reply = data?.choices?.[0]?.message?.content;
-    if (!reply) return { ok: false };
+    const reply =
+      data?.choices?.[0]?.message?.content ||
+      data?.choices?.[0]?.text;
 
-    return { ok: true, reply: reply.trim(), model: "groq:llama3-8b" };
-  } catch {
-    return { ok: false };
+    if (!reply) {
+      return { ok: false, error: "No reply from Groq" };
+    }
+
+    return {
+      ok: true,
+      reply: reply.trim(),
+      model: "groq:llama3-8b"
+    };
+  } catch (err) {
+    console.error("[GROQ ERROR]", err);
+    return { ok: false, error: err.message };
   }
 }
 
