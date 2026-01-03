@@ -128,6 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const reminderList = document.getElementById("reminderList");
   const clearRemindersBtn = document.getElementById("clearRemindersBtn");
 
+  let clearContentTimer = null;
+
   /* --------------------------
      TTS helper
      -------------------------- */
@@ -581,7 +583,10 @@ document.addEventListener("DOMContentLoaded", () => {
     recognition.onresult = async (ev) => {
       const text = ev.results[0][0].transcript;
       if (content) content.innerText = text;
-      setTimeout(()=> { if (content) content.innerText = ""; }, 1400);
+      if (clearContentTimer) clearTimeout(clearContentTimer);
+clearContentTimer = setTimeout(() => {
+  if (content) content.innerText = "";
+}, 1400);
       await handleMessage(text);
     };
 
@@ -604,7 +609,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Enter" && textInput.value.trim() !== "") {
         const typed = textInput.value.trim();
         if (content) content.innerText = typed;
-        setTimeout(()=> { if (content) content.innerText = ""; }, 1200);
+        if (clearContentTimer) clearTimeout(clearContentTimer);
+clearContentTimer = setTimeout(() => {
+  if (content) content.innerText = "";
+}, 1200);
         console.log("handleMessage called from typed input. message:", typed);
         await handleMessage(typed);
         textInput.value = "";
@@ -835,6 +843,10 @@ if (reply) {
   } catch (e) {
     console.warn("Auto-open panel failed:", e);
   }
+}
+        if (clearContentTimer) {
+  clearTimeout(clearContentTimer);
+  clearContentTimer = null;
 }
         if (content) content.innerText = reply;
         speak(reply);
