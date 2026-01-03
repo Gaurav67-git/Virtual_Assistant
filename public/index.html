@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NOVA — Virtual Assistant</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <!-- Auth Screen -->
+  <div id="auth-screen">
+    <div class="auth-tabs">
+      <button id="showLogin" class="active">Login</button>
+      <button id="showRegister">Register</button>
+    </div>
+
+    <div id="login-form" class="auth-form">
+      <h2>Login</h2>
+      <input type="text" id="login-username" placeholder="Email or username">
+      <input type="password" id="login-password" placeholder="Password">
+      <label class="remember"><input type="checkbox" id="rememberMe"> Remember Me</label>
+      <button id="loginBtn">Login</button>
+      <button id="googleLogin" class="google-btn">Sign in with Google</button>
+      <p id="login-msg"></p>
+    </div>
+
+    <div id="register-form" class="auth-form" style="display:none;">
+      <h2>Register</h2>
+      <input id="reg-name" placeholder="Full Name" />
+      <input id="reg-username" placeholder="Username" />
+      <input id="reg-email" placeholder="Email" />
+      <input id="reg-password" placeholder="Password" type="password" />
+      <button id="signupBtn">Register</button>
+      <p id="reg-msg"></p>
+    </div>
+  </div>
+
+    <!-- App (moved Tasks & Reminders inside app so they're visible) -->
+  <div id="app" style="display:none;">
+    <img id="logo" src="assets/logo.jpg" alt="logo" />
+    <h1>Welcome <span id="userName"></span></h1>
+    <h2>I'm <span id="name">Nova</span>, Your Virtual Assistant</h2>
+
+    <div id="control-bar">
+      <input id="textCommand" type="text" placeholder="Ask anything and press Enter..." autocomplete="off" />
+      <button id="btn" title="Speak" aria-label="Speak">
+        <!-- mic svg -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+          <path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/>
+          <path d="M19 11a1 1 0 0 0-2 0 5 5 0 0 1-10 0 1 1 0 0 0-2 0 7 7 0 0 0 6 6.92V22a1 1 0 0 0 2 0v-4.08A7 7 0 0 0 19 11z"/>
+        </svg>
+      </button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+
+    <p id="content"></p>
+    <div id="extra-info"></div>
+
+    <!-- MOVED: Tasks & Reminders inside the app card so they're visible -->
+    <div id="panels" style="margin-top:18px; width:100%; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <section id="tasks-section" style="min-width:280px; max-width:420px; flex:1;">
+        <h3>📝 To-Do</h3>
+        <div class="task-input" style="display:flex; gap:8px; align-items:center;">
+          <input id="taskInput" placeholder="Enter a task..." style="flex:1; padding:10px; border-radius:20px; border:none;"/>
+          <button id="addTaskBtn">Add</button>
+        </div>
+        <ul id="taskList" style="margin-top:10px; list-style:none; padding-left:0;"></ul>
+      </section>
+
+      <section id="reminder-section" style="min-width:280px; max-width:420px; flex:1;">
+        <h3>⏰ Reminders</h3>
+        <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+          <input id="reminderText" placeholder="Reminder text..." style="flex:1; padding:10px; border-radius:12px; border:none;" />
+          <input id="reminderTime" type="datetime-local" style="width:190px;" />
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button id="addReminderBtn">Set Reminder</button>
+          <button id="clearRemindersBtn">Clear local alerts</button>
+        </div>
+        <ul id="reminderList" style="margin-top:10px; list-style:none; padding-left:0;"></ul>
+      </section>
+    </div>
+  </div>
+
+  <!-- Load module script -->
+  <script type="module" src="js/script.js" defer></script>
+</body>
+</html>

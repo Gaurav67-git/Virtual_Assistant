@@ -1,0 +1,21 @@
+{
+  "name": "virtual-assistant",
+  "version": "1.0.0",
+  "description": "NOVA Virtual Assistant with ChatGPT, Firebase, and OpenWeather integration",
+  "main": "server/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Gaurav Dwivedi",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2"
+  }
+}

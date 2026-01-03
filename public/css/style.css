@@ -1,0 +1,424 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap');
+
+* {
+    margin:0; 
+    padding:0; 
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Animated background gradient */
+.bg-animation {
+    position:fixed;
+    top:0; left:0;
+    width:100%; 
+    height:100%;
+    background: linear-gradient(-45deg,
+      #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size:400% 400%;
+    animation: gradientMove 15s ease infinite;
+    z-index:-1;
+}
+
+@keyframes gradientMove {
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* Auth Screen */
+#auth-screen {
+  width: 90%;
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+#auth-screen input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.auth-buttons button {
+  flex: 1;
+  margin: 5px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #21a1f1, #d9338c);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-buttons button:hover {
+  transform: scale(1.05);
+}
+
+#auth-msg {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Assistant App */
+#app {
+    width:90%;
+    max-width:600px;
+    margin:40px auto;
+    padding:40px 30px;
+    border-radius:25px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:25px;
+    text-align:center;
+}
+
+#logo {
+    width:130px;
+    height:auto;
+    border-radius:50%;
+    box-shadow:0 0 20px rgba(255,255,255,0.4);
+}
+
+h1 {
+    color:#fff;
+    font-weight:600;
+    line-height:1.4;
+}
+#name {
+    color:#ff3e88;
+    font-size:48px;
+    font-family:"Protest Guerrilla", cursive;
+}
+#va {
+    color:#3ed2ff;
+    font-size:48px;
+    font-family:"Protest Guerrilla", cursive;
+}
+
+/* Control bar */
+#control-bar {
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+#textCommand {
+    flex:1;
+    padding:14px 20px;
+    border-radius:30px;
+    border:none;
+    font-size:18px;
+    outline:none;
+    background: rgba(255,255,255,0.15);
+    color:#fff;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.3s;
+}
+#textCommand::placeholder { color:#ddd; }
+#textCommand:focus {
+    background: rgba(255,255,255,0.25);
+}
+
+/* Mic button */
+#btn {
+    width:58px; height:58px;
+    background: linear-gradient(135deg, #21a1f1, #d9338c);
+    border:none;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 4px 15px rgba(0,0,0,0.3);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+#btn img {
+    width:28px; height:28px;
+    filter: invert(1);
+}
+#btn:hover {
+    transform: scale(1.1);
+    box-shadow:0 6px 20px rgba(0,0,0,0.4);
+}
+
+#logoutBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: crimson;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#content {
+    color:#fff;
+    font-size:20px;
+    min-height:24px;
+}
+
+#extra-info {
+    margin-top: 10px;
+    color: #fff;
+    font-size: 16px;
+    white-space: pre-line;
+    text-align: left;
+}
+
+@media (max-width:500px){
+    #name, #va { font-size:36px; }
+    #textCommand { font-size:16px; }
+}
+
+:root {
+  --name-color: black;
+  --va-color: black;
+  --logo-glow: rgba(255, 255, 255, 0.4);
+}
+
+#name {
+  color: var(--name-color);
+  font-size: 48px;
+  font-family: "Protest Guerrilla", cursive;
+}
+
+#va {
+  color: var(--va-color);
+  font-size: 48px;
+  font-family: "Protest Guerrilla", cursive;
+}
+
+#logo {
+  width: 130px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--logo-glow);
+}
+/* Auth Tabs */
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  
+  .auth-tabs button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .auth-tabs button.active {
+    background: linear-gradient(135deg, #21a1f1, #d9338c);
+    font-weight: bold;
+  }
+  
+  .auth-form {
+    text-align: center;
+  }
+  
+  .auth-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+  }
+  
+  .auth-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #21a1f1, #d9338c);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .auth-form p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #fff;
+  }
+  .auth-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+  }
+  
+  #userName {
+    color: #ffeb3b;
+    font-weight: bold;
+  }
+  
+/* Remember Me */
+.remember {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+    margin: 5px 0 10px 0;
+    color: #fff;
+  }
+  
+  .remember input {
+    margin-right: 8px;
+  }
+  
+  /* Username Greeting */
+  #userName {
+    color: #ffeb3b;
+    font-weight: bold;
+  }
+  .google-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #db4437;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .google-btn:hover {
+    background: #c33d2f;
+  }
+  /* Tasks & Reminders */
+#tasks-section {
+  width: 100%;
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  text-align: left;
+  color: #fff;
+}
+
+#tasks-section h3 {
+  margin: 10px 0;
+  color: #ffeb3b;
+}
+
+.task-input, .reminder-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.task-input input, .reminder-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+#taskList, #reminderList {
+  list-style: none;
+  padding: 0;
+}
+
+#taskList li, #reminderList li {
+  background: rgba(255,255,255,0.15);
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#taskList li.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+#taskList button, #reminderList button {
+  background: crimson;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+}
+/* Hide sections until opened */
+#tasks-section {
+  display: none;
+}
+#reminder-section {
+  display: none;
+}
+    #app { 
+      max-width: 720px; 
+      margin: 34px auto; 
+      background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      padding: 28px; 
+      border-radius: 18px; 
+      box-shadow: 0 12px 34px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+    #panels section { 
+      background: rgba(255,255,255,0.03); 
+      padding: 14px; 
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    #taskList li, #reminderList li { 
+      padding: 8px 10px; 
+      border-radius: 8px; 
+      background: rgba(0,0,0,0.03); 
+      margin-bottom: 8px; 
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    #taskList li.completed { text-decoration: line-through; opacity:0.6; }
+     
+  /* fade-in helper used by JS when revealing panels */
+.fade-in {
+  animation: nova-fade-in 0.42s ease forwards;
+}
+@keyframes nova-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+    
