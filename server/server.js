@@ -94,7 +94,7 @@ async function callGroqChat(groqKey, message) {
         Authorization: `Bearer ${groqKey}`
       },
       body: JSON.stringify({
-        model: "llama3-8b-8192",
+        model: "llama-3.1-8b-instant",
         messages: [
           { role: "system", content: "You are Nova, a concise and helpful assistant." },
           { role: "user", content: message }
@@ -109,10 +109,11 @@ async function callGroqChat(groqKey, message) {
     console.log("[GROQ STATUS]", r.status);
     console.log("[GROQ RESPONSE]", JSON.stringify(data, null, 2));
 
-    const reply =
-      data?.choices?.[0]?.message?.content ||
-      data?.choices?.[0]?.text;
+    if (!r.ok) {
+      return { ok: false, error: data };
+    }
 
+    const reply = data?.choices?.[0]?.message?.content;
     if (!reply) {
       return { ok: false, error: "No reply from Groq" };
     }
@@ -120,7 +121,7 @@ async function callGroqChat(groqKey, message) {
     return {
       ok: true,
       reply: reply.trim(),
-      model: "groq:llama3-8b"
+      model: "groq:llama-3.1-8b-instant"
     };
   } catch (err) {
     console.error("[GROQ ERROR]", err);
