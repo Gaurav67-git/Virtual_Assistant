@@ -170,29 +170,29 @@ app.post("/api/chat", async (req, res) => {
   const GROQ_KEY = process.env.GROQ_API_KEY;
   const OPENAI_KEY = process.env.OPENAI_API_KEY;
 
-  // 1️⃣ Gemini (if available)
-  if (GEMINI_KEY) {
-    const result = await callGeminiGenerate(GEMINI_KEY, "gemini-2.0-flash", message);
-    if (result.ok) {
-      return res.json({ reply: result.reply, model: result.model });
-    }
+  // 1️⃣ GROQ FIRST (FREE + WORKING)
+if (GROQ_KEY) {
+  const result = await callGroqChat(GROQ_KEY, message);
+  if (result.ok) {
+    return res.json({ reply: result.reply, model: result.model });
   }
+}
 
-  // 2️⃣ Groq (FREE)
-  if (GROQ_KEY) {
-    const result = await callGroqChat(GROQ_KEY, message);
-    if (result.ok) {
-      return res.json({ reply: result.reply, model: result.model });
-    }
+// 2️⃣ Gemini (optional, may fail)
+if (GEMINI_KEY) {
+  const result = await callGeminiGenerate(GEMINI_KEY, "gemini-2.0-flash", message);
+  if (result.ok) {
+    return res.json({ reply: result.reply, model: result.model });
   }
+}
 
-  // 3️⃣ OpenAI (last fallback)
-  if (OPENAI_KEY) {
-    const result = await callOpenAI(OPENAI_KEY, message);
-    if (result.ok) {
-      return res.json({ reply: result.reply, model: result.model });
-    }
+// 3️⃣ OpenAI (optional)
+if (OPENAI_KEY) {
+  const result = await callOpenAI(OPENAI_KEY, message);
+  if (result.ok) {
+    return res.json({ reply: result.reply, model: result.model });
   }
+}
 
   return res.status(500).json({ error: "All AI providers failed" });
 });
