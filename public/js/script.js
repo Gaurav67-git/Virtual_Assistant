@@ -150,22 +150,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function speak(text) {
-    try {
-      const lang = detectLangFromText(text);
-      const utt = new SpeechSynthesisUtterance(text);
-      utt.rate = 1;
-      utt.pitch = 1;
-      utt.lang = lang;
-      const voices = window.speechSynthesis.getVoices();
-      if (voices && voices.length) {
-        const match = voices.find(v => v.lang && v.lang.toLowerCase().startsWith(lang.split('-')[0]));
-        if (match) utt.voice = match;
-      }
-      window.speechSynthesis.speak(utt);
-    } catch (e) {
-      console.warn("TTS failed:", e);
+  try {
+    // stop any previous speech
+    window.speechSynthesis.cancel();
+
+    const lang = detectLangFromText(text);
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.rate = 1;
+    utt.pitch = 1;
+    utt.lang = lang;
+
+    const voices = window.speechSynthesis.getVoices();
+    if (voices && voices.length) {
+      const match = voices.find(v =>
+        v.lang && v.lang.toLowerCase().startsWith(lang.split("-")[0])
+      );
+      if (match) utt.voice = match;
     }
+
+    // ✅ CLEAR TEXT ONLY AFTER SPEECH FINISHES
+    utt.onend = () => {
+      console.log("Assistant finished speaking");
+      // OPTIONAL: clear text here if you want
+      // content.innerText = "";
+    };
+
+    window.speechSynthesis.speak(utt);
+  } catch (e) {
+    console.warn("TTS failed:", e);
   }
+}
 
   /* --------------------------
      Auth UI toggle
@@ -823,7 +837,6 @@ if (reply) {
   }
 }
         if (content) content.innerText = reply;
-        setTimeout(()=> { if (content) content.innerText = ""; }, 4000);
         speak(reply);
 
         console.log("Fetch roundtrip took (ms):", Date.now() - start);
