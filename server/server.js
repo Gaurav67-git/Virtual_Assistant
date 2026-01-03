@@ -104,8 +104,12 @@ async function callGroqChat(groqKey, message) {
       })
     });
 
-    const data = await r.json();
-    if (!r.ok) return { ok: false };
+    const data = await response.json();
+console.log("[GROQ RAW RESPONSE]", JSON.stringify(data, null, 2));
+
+if (!response.ok) {
+  return { ok: false, error: data };
+}
 
     const reply = data?.choices?.[0]?.message?.content;
     if (!reply) return { ok: false };
